@@ -19,7 +19,7 @@ app.config(function Config($httpProvider, jwtInterceptorProvider) {
     $httpProvider.interceptors.push('jwtInterceptor');
 })
 
-app.controller("MainController", function($scope, $location, store, jwtHelper) {
+app.controller("MainController", function($scope, $location, store, jwtHelper, LoginService) {
     $scope.dataMain = {isLoged: false, loading: false, usuario: {}};
     
     $scope.telaAtiva = function (viewLocation) { 
@@ -34,7 +34,6 @@ app.controller("MainController", function($scope, $location, store, jwtHelper) {
     }
 
     $scope.login = function(usuario) {
-        /* TODO:
         $scope.dataMain.loading = true;
         var resposta = LoginService.login(usuario.login, usuario.senha);
             resposta.then(function(data) {
@@ -48,7 +47,7 @@ app.controller("MainController", function($scope, $location, store, jwtHelper) {
                 $scope.dataMain.loading = false;
                 alert("Login Invalido");
             }
-        });*/
+        });
     };
     
     var jwt = store.get('jwt');
