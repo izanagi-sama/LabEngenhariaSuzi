@@ -132,14 +132,14 @@
                     {{datalogin.erro}}
                   </div>
 
-                <input type="text" class="form-control" placeholder="Email" required autofocus ng-model="usuario.email">
-                <input type="password" class="form-control" placeholder="Senha" required ng-model="usuario.senha">
+                <input type="text" class="form-control" placeholder="Email" required autofocus ng-model="dataMain.usuario.login">
+                <input type="password" class="form-control" placeholder="Senha" required ng-model="dataMain.usuario.senha">
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login(usuario)">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login(dataMain.usuario)">
                     Login
                 </button>
                 <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me" ng-model="usuario.lembrar">
+                    <input type="checkbox" value="remember-me" ng-model="dataMain.usuario.lembrar">
                     Lembrar
                 </label>
                 </form>
