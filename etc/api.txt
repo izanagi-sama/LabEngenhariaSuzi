@@ -1,0 +1,81 @@
+Lista planos: Retorna lista planos
+    /php/planos.php: 
+        retorna: 
+            {"planos": [ //lista de planos
+                    {  "id" : 1,           //id do plano
+                        "nome" : "Plano1",
+                        "valor": 123.00    //caso json não suportar virgula, usar inteiro mesmo, assumir a virgula, ou seja 10,43 -> 1043; 43,00 -> 4300
+                    },
+                    {id:2, nome: "asdas", valor: 321}
+                ]
+            }
+
+
+Login Freelancer:
+    /php/login/freelancer.php:
+        envia: 
+            {"login":"asd", senha: "asd"}
+        retorna:
+            {resultado: true|false, jwt: "asdasdasdasdsdgh"} //JTW: https://jwt.io/ OBS: perguntar Rubens
+        
+Login cliente:
+    /php/login/cliente.php:
+        envia:
+            {"login" : "asd", "senha" : "asd"}
+        retorna:
+            {"resultado" : true|false, "jwt" : "asdasdasdasdsdgh"}
+        
+Login admin:
+    /php/login/admin.php:
+        envia:
+            {"login" : "asd", "senha" : "asd"}
+        retorna:
+            {"resultado" : true|false, "jwt" : "asdasdasdasdsdgh"}
+        
+Cadastra Freelancer: recebe as informações do freelancer e altera o banco
+    /php/freelancer/cadastra.php
+        envia:
+            {"nome" : "asdasd", "email" : "asdasd", "cpf" : "123123123", "senha" : "asdasd", "espcialidade" : [1,2,5,7]}
+        retorna:
+            {"resultado" : true|false}
+
+Freelancer lista trabalhos disponiveis: lista de trabalhos não acinados, e com a especialidade correta com o freelancer
+    /php/freelancer/trabalho-disponivel.php
+        envia:
+            {"filtro" : "asdasd"} //opcional
+        retorna:
+            {planos: [      //lista de planos
+                {   "id" : 2,
+                    "nome" : "asd",
+                    "plano" : 1,
+                    "descricao": "asdasd"
+                }, {"id" : 3, "nome" : "asd2", "plano" : 3, "descricao" : "asdasd"},
+            ]}
+        
+        
+Freelancer lista em andamento: Freelancer, trabalho aceito, e não concluido
+    /php/freelancer/trabalho-andamento.php:
+        envia: {}
+        retorna: {planos: [{id:2, nome:"asd", plano:1, descricao: "asdasd"}]}
+        
+        
+Freelancer lista em concluido: Freelancer, trabalho aceito e concluido
+    /php/freelancer/trabalho-concluido.php:
+        envia: {filtro: "asdasd"} //opcional
+        retorna: {planos: [{id:2, nome:"asd", plano:1, descricao: "asdasd"}]}
+        
+        
+visualizar dados Freelancer: Retorna dados do freelancer
+    /php/freelancer/retorna-dados.php
+        envia: {}
+        retorna: {"nome": "asdasd", "email": "asdasd", "cpf": "123123123", "senha": "asdasd", "espcialidade": [1,2,5,7]}
+        
+Edita dados Freelancer: recebe as informações do freelancer e altera o banco Obs: verificar se o usuario é valido
+    /php/freelancer/altera-dados.php
+        envia: {"nome": "asdasd", email: "asdasd", "cpf": "123123123", "senha": "asdasd", espcialidade: [1,2,5,7]} //pode fazer envio parcial
+        retorna: {resultado: true|false}
+        
+Freelancer modifica trabalho: aceita, finaliza o trabalho
+    /php/freelancer/altera-trabalho.php
+        envia: {trabalho:1, estado:"aceito|finalizado"} // trabalho é o id do trabalho
+        retorna: {resultado: true|false}
