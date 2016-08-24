@@ -5,9 +5,9 @@ Lista planos: Retorna lista planos
                     {  "id" : 1,           //id do plano
                         "nome" : "Plano1",
                         "valor": 123.00,    //caso json não suportar virgula, usar inteiro mesmo, assumir a virgula, ou seja 10,43 -> 1043; 43,00 -> 4300
-                        "descricao-curta" : "blablabal"
+                        "descricaoCurta" : "blablabal"
                     },
-                    {"id":2, "nome": "asdas", "valor": 321, "descricao-curta" : "blablabal"}
+                    {"id":2, "nome": "asdas", "valor": 321, "descricaoCurta" : "blablabal"}
                 ]
             }
             
@@ -17,9 +17,9 @@ Lista especialidades: Retorna lista pespecialidades do freelancer
             {"especialidades": [ //lista de especialidades
                     {  "id" : 1,           //id da especialidade
                         "nome" : "HTML",
-                        "descricao-curta" : "blablabal"
+                        "descricaoCurta" : "blablabal"
                     },
-                    {"id":2, "nome": "asdas", "descricao-curta" : "blablabal"}
+                    {"id":2, "nome": "asdas", "descricaoCurta" : "blablabal"}
                 ]
             }
 
