@@ -4,9 +4,22 @@ Lista planos: Retorna lista planos
             {"planos": [ //lista de planos
                     {  "id" : 1,           //id do plano
                         "nome" : "Plano1",
-                        "valor": 123.00    //caso json não suportar virgula, usar inteiro mesmo, assumir a virgula, ou seja 10,43 -> 1043; 43,00 -> 4300
+                        "valor": 123.00,    //caso json não suportar virgula, usar inteiro mesmo, assumir a virgula, ou seja 10,43 -> 1043; 43,00 -> 4300
+                        "descricao-curta" : "blablabal"
                     },
-                    {id:2, nome: "asdas", valor: 321}
+                    {"id":2, "nome": "asdas", "valor": 321, "descricao-curta" : "blablabal"}
+                ]
+            }
+            
+Lista especialidades: Retorna lista pespecialidades do freelancer
+    /php/especialidades.php: 
+        retorna: 
+            {"especialidades": [ //lista de especialidades
+                    {  "id" : 1,           //id da especialidade
+                        "nome" : "HTML",
+                        "descricao-curta" : "blablabal"
+                    },
+                    {"id":2, "nome": "asdas", "descricao-curta" : "blablabal"}
                 ]
             }
 
@@ -14,9 +27,9 @@ Lista planos: Retorna lista planos
 Login Freelancer:
     /php/login/freelancer.php:
         envia: 
-            {"login":"asd", senha: "asd"}
+            {"login":"asd", "senha": "asd"}
         retorna:
-            {resultado: true|false, jwt: "asdasdasdasdsdgh"} //JTW: https://jwt.io/ OBS: perguntar Rubens
+            {"resultado": true|false, "jwt": "asdasdasdasdsdgh"} //JTW: https://jwt.io/ OBS: perguntar Rubens
         
 Login cliente:
     /php/login/cliente.php:
@@ -55,14 +68,14 @@ Freelancer lista trabalhos disponiveis: lista de trabalhos não acinados, e com 
         
 Freelancer lista em andamento: Freelancer, trabalho aceito, e não concluido
     /php/freelancer/trabalho-andamento.php:
-        envia: {}
-        retorna: {planos: [{id:2, nome:"asd", plano:1, descricao: "asdasd"}]}
+        envia: {"filtro" : "asdasd"} //opcional
+        retorna: {"planos": [{"id" : 2, "nome" : "asd", "plano" : 1, "descricao" : "asdasd"}]}
         
         
 Freelancer lista em concluido: Freelancer, trabalho aceito e concluido
     /php/freelancer/trabalho-concluido.php:
-        envia: {filtro: "asdasd"} //opcional
-        retorna: {planos: [{id:2, nome:"asd", plano:1, descricao: "asdasd"}]}
+        envia: {"filtro" : "asdasd"} //opcional
+        retorna: {"planos": [{"id" : 2, "nome" : "asd", "plano" : 1, "descricao" : "asdasd"}]}
         
         
 visualizar dados Freelancer: Retorna dados do freelancer
