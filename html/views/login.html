@@ -126,20 +126,20 @@
                 <img class="profile-img" src="imgs/logo-media.png" alt="" height="128" width="128">
                 <form class="form-signin">
 
-                  <div class="alert alert-danger" role="alert" ng-show="datalogin.erro">
+                  <div class="alert alert-danger" role="alert" ng-show="usuario.erro">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Erro:</span>
-                    {{datalogin.erro}}
+                    {{usuario.erro}}
                   </div>
 
-                <input type="text" class="form-control" placeholder="Email" required autofocus ng-model="dataMain.usuario.login">
-                <input type="password" class="form-control" placeholder="Senha" required ng-model="dataMain.usuario.senha">
+                <input type="text" class="form-control" placeholder="Email" required autofocus ng-model="usuario.login">
+                <input type="password" class="form-control" placeholder="Senha" required ng-model="usuario.senha">
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login(dataMain.usuario)">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login(usuario)">
                     Login
                 </button>
                 <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me" ng-model="dataMain.usuario.lembrar">
+                    <input type="checkbox" value="remember-me" ng-model="usuario.lembrar">
                     Lembrar
                 </label>
                 </form>

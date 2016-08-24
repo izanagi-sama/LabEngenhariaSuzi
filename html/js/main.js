@@ -6,9 +6,9 @@ app.config(['$routeProvider', function($routeProvider) {
     }).when('/inicio', {
         templateUrl: 'views/inicio.html',
         controller: 'InicioController'
-    }).when('/login', {
-        templateUrl: 'views/login.html'
-        //TODO: controller: 'LoginController'
+    }).when('/loginFreelancer', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginFreelancerController'
     }).otherwise({
         redirectTo: '/'
     });
@@ -37,20 +37,7 @@ app.controller("MainController", function($scope, $location, store, jwtHelper, L
     }
 
     $scope.login = function(usuario) {
-        $scope.dataMain.loading = true;
-        var resposta = LoginService.login(usuario.login, usuario.senha);
-            resposta.then(function(data) {
-            if(data.resposta == "sucesso") {
-                $scope.isLoged = true;
-                store.set('jwt', data.jwt);
-                $scope.dataMain.usuario = jwtHelper.decodeToken(data.jwt).data;
-                $location.path('/home');
-                $scope.dataMain.loading = false;
-            } else {
-                $scope.dataMain.loading = false;
-                alert("Login Invalido");
-            }
-        });
+        alert("Erro login não implementado");
     };
     
     var jwt = store.get('jwt');

@@ -3,7 +3,7 @@ app.factory('LoginService', function($http) {
     var urlFreelancer = "/php/login/freelancer.php";
     var urlAdmin = "/php/login/admin.php";
     
-    var login = function(login, senha, url) {
+    var loginGeral = function(login, senha, url) {
         return $http.post(url, {login: login, senha: senha}).then(
             function sucesso(respostaServidor) {
                 return respostaServidor.data;
@@ -14,15 +14,15 @@ app.factory('LoginService', function($http) {
     }
     
     var loginCliente = function(login, senha) {
-        return login(login, senha, urlCliente);
+        return loginGeral(login, senha, urlCliente);
     }
     
     var loginFreelancer = function(login, senha) {
-        return login(login, senha, urlFreelancer);
+        return loginGeral(login, senha, urlFreelancer);
     }
     
     var loginAdmin = function(login, senha) {
-        return login(login, senha, urlAdmin);
+        return loginGeral(login, senha, urlAdmin);
     }
     
     return {
