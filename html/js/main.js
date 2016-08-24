@@ -2,7 +2,10 @@ var app = angular.module('mporn', ['ngRoute', 'angular-storage', 'angular-jwt'])
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
-        redirectTo: '/login'
+        redirectTo: '/inicio'
+    }).when('/inicio', {
+        templateUrl: 'views/inicio.html',
+        controller: 'InicioController'
     }).when('/login', {
         templateUrl: 'views/login.html'
         //TODO: controller: 'LoginController'
