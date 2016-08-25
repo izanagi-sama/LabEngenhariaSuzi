@@ -57,7 +57,7 @@ Freelancer lista trabalhos disponiveis: lista de trabalhos não acinados, e com 
         envia:
             {"filtro" : "asdasd"} //opcional
         retorna:
-            {planos: [      //lista de planos
+            {trabalhos: [      //lista de trabalhos
                 {   "id" : 2,
                     "nome" : "asd",
                     "plano" : 1,
@@ -69,13 +69,13 @@ Freelancer lista trabalhos disponiveis: lista de trabalhos não acinados, e com 
 Freelancer lista em andamento: Freelancer, trabalho aceito, e não concluido
     /php/freelancer/trabalho-andamento.php:
         envia: {"filtro" : "asdasd"} //opcional
-        retorna: {"planos": [{"id" : 2, "nome" : "asd", "plano" : 1, "descricao" : "asdasd"}]}
+        retorna: {"trabalhos": [{"id" : 2, "nome" : "asd", "plano" : 1, "descricao" : "asdasd"}]}
         
         
 Freelancer lista em concluido: Freelancer, trabalho aceito e concluido
     /php/freelancer/trabalho-concluido.php:
         envia: {"filtro" : "asdasd"} //opcional
-        retorna: {"planos": [{"id" : 2, "nome" : "asd", "plano" : 1, "descricao" : "asdasd"}]}
+        retorna: {"trabalhos": [{"id" : 2, "nome" : "asd", "plano" : 1, "descricao" : "asdasd"}]}
         
         
 visualizar dados Freelancer: Retorna dados do freelancer
