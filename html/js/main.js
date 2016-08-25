@@ -9,6 +9,9 @@ app.config(['$routeProvider', function($routeProvider) {
     }).when('/loginFreelancer', {
         templateUrl: 'views/login.html',
         controller: 'LoginFreelancerController'
+    }).when('/freelancer', {
+        templateUrl: 'views/freelancer.html',
+        controller: 'FreelancerController'
     }).otherwise({
         redirectTo: '/'
     });
