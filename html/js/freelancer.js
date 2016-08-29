@@ -1,4 +1,4 @@
-app.controller("FreelancerController", function($scope, $location, store, jwtHelper, TrabalhoService, FreelancerService) {
+app.controller("FreelancerController", function($scope, $location, store, jwtHelper, TrabalhoService, FreelancerService, EspecialidadeService) {
     $scope.dataFreelancer = {aba: null, disponiveis: [], andamento: [], concluido: [], dados: {}};
     
     $scope.atualizaFreelancerDados = function() {
@@ -54,11 +54,20 @@ app.controller("FreelancerController", function($scope, $location, store, jwtHel
                 break;
             case 'info':
                 $scope.dataMain.loading = true;
+                $scope.dataMain.loading2 = 2;
                 FreelancerService.getDados().then(function(data) {
                     if(data) {
                         $scope.dataFreelancer.dados = data;
                         $scope.dataFreelancer.senha2 = $scope.dataFreelancer.dados.senha;
-                        $scope.dataMain.loading = false;
+                        $scope.dataMain.loading2 -= 1;
+                    }else{
+                        alert("Erro ao receber dados do servidor");
+                    }
+                });
+                EspecialidadeService.getEspecialidades().then(function(data) {
+                    if(data.especialidades) {
+                        $scope.dataFreelancer.todasEspecialidades = data.especialidades;
+                        $scope.dataMain.loading2 -= 1;
                     }else{
                         alert("Erro ao receber dados do servidor");
                     }
