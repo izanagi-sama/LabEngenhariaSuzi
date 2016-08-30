@@ -4,7 +4,9 @@
     
     <h2>Planos Disponiveis:</h21><br />
     
-    <div class="row">
+    <!-- TODO: Tela de loading -->
+    <div ng-show="dataInicio.loading != 0">loading</div>
+    <div class="row" ng-hide="dataInicio.loading != 0">
       <div ng-repeat="plano in dataInicio.planos" class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img src="imgs/logo-media.png" alt="plano1" height="200" width="200">

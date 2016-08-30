@@ -1,0 +1,18 @@
+<div ng-show="dataFreelancerTrabalhoAndamento.loading != 0">loading</div>
+<div ng-hide="dataFreelancerTrabalhoAndamento.loading != 0">
+    <div class="alert alert-danger" ng-show="dataFreelancerTrabalhoAndamento.erro.mensagem">
+        <span>{{dataFreelancerTrabalhoAndamento.erro.mensagem}}</span>
+    </div>
+    <div class="panel panel-default">
+        <table class="table">
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+            </tr>
+            <tr ng-repeat="trabalho in dataFreelancerTrabalhoAndamento.dados">
+                <td>{{trabalho.nome}}</td>
+                <td>{{trabalho.descricao}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
