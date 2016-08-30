@@ -1,4 +1,4 @@
-var app = angular.module('mporn', ['ngRoute', 'angular-storage', 'angular-jwt']);
+var app = angular.module('mporn', ['ngRoute', 'angular-storage', 'angular-jwt', 'ui.mask', 'ngCpfCnpj']);
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
@@ -6,12 +6,26 @@ app.config(['$routeProvider', function($routeProvider) {
     }).when('/inicio', {
         templateUrl: 'views/inicio.html',
         controller: 'InicioController'
-    }).when('/loginFreelancer', {
-        templateUrl: 'views/login.html',
+    }).when('/login/freelancer', {
+        templateUrl: 'views/login-freelancer.html',
         controller: 'LoginFreelancerController'
+    }).when('/cadastro/freelancer', {
+        templateUrl: 'views/cadastra-freelancer.html',
+        controller: 'CadastroFreelancerController'
     }).when('/freelancer', {
-        templateUrl: 'views/freelancer.html',
-        controller: 'FreelancerController'
+        redirectTo: '/freelancer/disponivel'
+    }).when('/freelancer/disponivel', {
+        templateUrl: 'views/freelancer/trabalho-disponivel.html',
+        controller: 'FreelancerTrabalhoDisponivelController'
+    }).when('/freelancer/andamento', {
+        templateUrl: 'views/freelancer/trabalho-andamento.html',
+        controller: 'FreelancerTrabalhoAndamentoController'
+    }).when('/freelancer/concluido', {
+        templateUrl: 'views/freelancer/trabalho-concluido.html',
+        controller: 'FreelancerTrabalhoConcluidoController'
+    }).when('/freelancer/dados', {
+        templateUrl: 'views/freelancer/dados.html',
+        controller: 'FreelancerDadosController'
     }).otherwise({
         redirectTo: '/'
     });
@@ -28,8 +42,12 @@ app.config(function Config($httpProvider, jwtInterceptorProvider) {
 app.controller("MainController", function($scope, $location, store, jwtHelper, LoginService) {
     $scope.dataMain = {isLoged: false, loading: false, usuario: {}};
     
-    $scope.telaAtiva = function (viewLocation) { 
+    $scope.isTelaAtiva = function (viewLocation) { 
         return viewLocation === $location.path();
+    };
+    
+    $scope.getTelaAtiva = function (viewLocation) { 
+        return $location.path();
     };
     
     $scope.logout = function() {
