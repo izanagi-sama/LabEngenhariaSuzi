@@ -17,15 +17,13 @@ if (isset($_POST['id_freelancer'])){
 
 try{
     $conn = new PDO($dsn, $user, $password);
-    $query = "Select * from freelancer where id_freelancer = {$freela}";
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $result = $conn->query($query);
+    $stmt = $conn->prepare('DELETE FROM freelancer WHERE id_freelancer = :id');
+    $stmt->bindParam(':id', $freela); 
+    if($stmt->execute()){echo json_encode(['resultado' => true]);}
     
-    if($result) {
-        while ($row = $result->fetch(PDO::FETCH_OBJ)){
-            echo json_encode($row);
-        }
-    }
+   
     
 } catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
