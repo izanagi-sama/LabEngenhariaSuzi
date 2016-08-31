@@ -4,9 +4,7 @@
     
     
     /* Connect to a MySQL database using driver invocation */
-$dsn = 'mysql:dbname=mporn;host=localhost';
-$user = 'root';
-$password = '';
+    require_once("config.php");
 
 try {
     $conn = new PDO($dsn, $user, $password);

@@ -1,8 +1,16 @@
 <?php
+
 //implementação para teste do frontend:
 header('Content-type: application/json; charset=utf-8');
 
+
+use \Firebase\JWT\JWT;
+require_once("../vendor/autoload.php");
+
 require_once("../config.php");
+include("../recebe-jwt.php");
+
+
 
 $freela = array();
 
@@ -16,12 +24,14 @@ if (isset($input['id_freelancer'])){
     echo json_encode(['resultado' => false]);
     exit;
 }
-/**/
+/**/ //não! o id é recebido de dentro do JWT
+$id = $token->data->id;
+
 
 try{
     $conn = new PDO($dsn, $user, $password);
     //TODO: use a API de subtituição de parametros, isso é MUITO errado, você poderia pelo menos verificar se a tipo é INT
-    $query = "Select * from freelancer where id_freelancer = {$freela}";
+    $query = "Select * from freelancer where id_freelancer = {$id}";
     
     $result = $conn->query($query);
     
