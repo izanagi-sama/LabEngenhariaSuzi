@@ -1,50 +1,78 @@
-<div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="dataLogin.cadastrar">
+<div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <div class="panel panel-info">
         <div class="panel-heading">
             <center>
                 <img class="profile-img" src="imgs/logo-media.png" alt="" height="128" width="128">
                 <div class="panel-title">Cadastrar</div>
             </center>
-            <div class="panel-title text-right"><a id="signinlink" href="" ng-click="mostrarTelaCadastrar(false)">Login</a></div>
+            <div class="panel-title text-right"><a id="signinlink" href="#/login/freelancer">Login</a></div>
 
         </div>
         <div class="panel-body">
-            <form id="signupform" class="form-horizontal" role="form">
+            <form name="cadastroForm" class="form-horizontal" role="form" novalidate>
 
-                <div id="signupalert" class="alert alert-danger" ng-show="dataLogin.erro">
-                    <span>{{dataLogin.erro}}</span>
-                </div>
-                <div class="form-group">
-                    <label for="nome" class="col-md-3 control-label">Nome:</label>
-                    <div class="col-md-9">
-                        <input type="input" id="nome" class="form-control" name="Nome" placeholder="Nome" required autofocus ng-model="dataLogin.dataCadastra.nome">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="email" class="col-md-3 control-label">Email:</label>
-                    <div class="col-md-9">
-                        <input type="input" id="email" class="form-control" name="Email" placeholder="Email" required ng-model="dataLogin.dataCadastra.email">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="senha" class="col-md-3 control-label">Senha:</label>
-                    <div class="col-md-9">
-                        <input type="password" id="senha" class="form-control" placeholder="Senha" required ng-model="dataLogin.dataCadastra.senha">
-                    </div>
-
-                    <label for="senha2" class="col-md-3 control-label">Confirmar Senha:</label>
-                    <div class="col-md-9">
-                        <input type="password" id="senha2" class="form-control" placeholder="Confirmar Senha" required ng-model="dataLogin.senha2">
-                    </div>
+                <div class="alert alert-danger" ng-show="dataCadastraFreelancer.erro.mensagem">
+                    <span>{{dataCadastraFreelancer.erro.mensagem}}</span>
                 </div>
 
 
+                <div class="form-group" ng-class="{'has-error': dataCadastraFreelancer.erro.nome.requerido || dataCadastraFreelancer.erro.nome.tamanho}">
+                    <label for="nomeInput" class="control-label col-md-3">Nome:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="nomeInput" name="nomeInput" class="form-control" placeholder="Nome" required autofocus minlength="2" ng-model="dataCadastraFreelancer.data.nome">
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.nome.requerido">Campo Requerido</span>
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.nome.tamanho">Nome Precisa ter no minimo 2 Caracteres</span>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': dataCadastraFreelancer.erro.email.requerido || dataCadastraFreelancer.erro.email.invalido}">
+                    <label for="emailInput" class="control-label col-md-3">Email:</label>
+                    <div class="col-md-9">
+                        <input type="email" id="emailInput" name="emailInput" class="form-control" placeholder="Email" required ng-model="dataCadastraFreelancer.data.email">
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.email.requerido">Campo Requerido</span>
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.email.invalido">Email Invalido</span>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': dataCadastraFreelancer.erro.cpfcnpj.requerido || dataCadastraFreelancer.erro.cpfcnpj.invalido}">
+                    <label for="cpfcnpjInput" class="control-label col-md-3">CPF:</label>
+                    <!-- TODO: CPF/CNPJ -->
+                    <div class="col-md-9">
+                        <input id="cpfcnpjInput" name="cpfcnpjInput" class="form-control" required ng-cpf ui-mask="999.999.999-99" ng-model="dataCadastraFreelancer.data.cpfcnpj">
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.cpfcnpj.requerido">CPF Requerido</span>
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.cpfcnpj.invalido">CPF Invalido</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group" ng-class="{'has-error': dataCadastraFreelancer.erro.senha.requerido || dataCadastraFreelancer.erro.senha.tamanho || dataCadastraFreelancer.erro.senha.difere}">
+                    <label for="senhaInput" class="col-md-3 control-label">Senha:</label>
+                    <div class="col-md-9">
+                        <input type="password" id="senhaInput" name="senhaInput" class="form-control" placeholder="Senha" required minlength="5" ng-model="dataCadastraFreelancer.data.senha">
+                    </div>
+
+                    <label for="senhaInput2" class="col-md-3 control-label">Confirmar Senha:</label>
+                    <div class="col-md-9">
+                        <input type="password" id="senhaInput2" class="form-control" placeholder="Confirmar Senha" required ng-model="dataCadastraFreelancer.senha2">
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.senha.requerido">Senhas Requeridas</span>
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.senha.tamanho">Senha tem tamanho minimo de 5 caracteres</span>
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.senha.difere">Senhas Diferentes</span>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': dataCadastraFreelancer.erro.especialidade.requerido}">
+                    <label for="especialidadeInput" class="col-md-3 control-label">Especialidades:</label>
+                    <div class="col-md-9">
+                        <select id="especialidadeInput" name="especialidadeInput" class="selectpicker form-control" required multiple ng-model="dataCadastraFreelancer.dados.especialidades">
+                            <option ng-repeat="especialidade in dataCadastraFreelancer.todasEspecialidades" value="{{especialidade.id}}">{{especialidade.nome}}</option>
+                        </select>
+                        <span class="help-block" ng-show="dataCadastraFreelancer.erro.especialidade.requerido">Especialidade Requerida</span>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <div class="col-md-offset-3 col-md-9">
-                        <button id="btn-signup" type="button" class="btn btn-info" ng-click="cadastrar(dataLogin.dataCadastra, dataLogin.senha2)">Cadastrar</button>
+                        <button id="btn-signup" type="button" class="btn btn-info" ng-click="cadastrar(dataCadastraFreelancer.data)">Cadastrar</button>
                     </div>
                 </div>
             </form>

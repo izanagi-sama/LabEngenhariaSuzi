@@ -50,7 +50,7 @@ Cadastra Freelancer: recebe as informações do freelancer e altera o banco
         envia:
             {"nome" : "asdasd", "email" : "asdasd", "cpf" : "123123123", "senha" : "asdasd", "espcialidade" : [1,2,5,7]}
         retorna:
-            {"resultado" : true|false}
+            {"resultado" : true|false, mensagem: "Mensagem de erro"}
 
 Freelancer lista trabalhos disponiveis: lista de trabalhos não acinados, e com a especialidade correta com o freelancer
     /php/freelancer/trabalho-disponivel.php
@@ -81,14 +81,14 @@ Freelancer lista em concluido: Freelancer, trabalho aceito e concluido
 visualizar dados Freelancer: Retorna dados do freelancer
     /php/freelancer/retorna-dados.php
         envia: {}
-        retorna: {"nome": "asdasd", "email": "asdasd", "cpf": "123123123", "senha": "asdasd", "espcialidade": [1,2,5,7]}
+        retorna: {"nome": "asdasd", "email": "asdasd", "cpfcnpj": "123123123", "senha": "asdasd", "espcialidade": ["1","2","5","7"]}
         
 Edita dados Freelancer: recebe as informações do freelancer e altera o banco Obs: verificar se o usuario é valido
     /php/freelancer/altera-dados.php
         envia: {"nome": "asdasd", email: "asdasd", "cpf": "123123123", "senha": "asdasd", espcialidade: [1,2,5,7]} //pode fazer envio parcial
-        retorna: {resultado: true|false}
+        retorna: {resultado: true|false, mensagem: "Mensagem de erro"}
         
 Freelancer modifica trabalho: aceita, finaliza o trabalho
     /php/freelancer/altera-trabalho.php
         envia: {trabalho:1, estado:"aceito|finalizado"} // trabalho é o id do trabalho
-        retorna: {resultado: true|false}
+        retorna: {resultado: true|false, mensagem: "Mensagem de erro"}
