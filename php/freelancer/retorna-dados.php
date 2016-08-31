@@ -31,19 +31,20 @@ $id = $token->data->id;
 try{
     $conn = new PDO($dsn, $user, $password);
     //TODO: use a API de subtituição de parametros, isso é MUITO errado, você poderia pelo menos verificar se a tipo é INT
-    $query = "Select * from freelancer where id_freelancer = {$id}";
+    //TODO: especialidades
+    $stmt = $conn->prepare('SELECT nome,email,cpf as cpfcnpj FROM freelancer WHERE id_freelancer = :id');
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     
-    $result = $conn->query($query);
+    $stmt->execute();
     
-    if($result) {
-        while ($row = $result->fetch(PDO::FETCH_OBJ)){
-            echo json_encode($row);
-        }
+    if($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+        echo json_encode($row);
+    } else {
+        echo json_encode(['resultado' => false]);
     }
     
 } catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
-    echo json_encode(['resultado' => false]);
+    echo json_encode(['resultado' => false, 'mensagem' => 'Connection failed: ' . $e->getMessage()]);
 }
 
 $conn = null;
