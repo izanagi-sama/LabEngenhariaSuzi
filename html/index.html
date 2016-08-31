@@ -17,17 +17,36 @@
     <script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>    
     
+    <!-- Validação de CPF/CNPJ -->
+    <script type="text/javascript" src="js/bower_components/cpf_cnpj/build/cpf.js"></script>
+    <script type="text/javascript" src="js/bower_components/cpf_cnpj/build/cnpj.js"></script>
+    <script type="text/javascript" src="js/bower_components/ng-cpf-cnpj/lib/ngCpfCnpj.js"></script>
+    
+    <!-- Validação e formatação de input -->
+    <script type="text/javascript" src="js/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="js/bower_components/angular-ui-mask/dist/mask.js"></script>
+    
     <!-- Arquivos AngularJS -->
-    <script src="js/main.js"></script>
-    <script src="js/services/login.js"></script>
-    <script src="js/services/plano.js"></script>
-    <script src="js/services/trabalho.js"></script>
-    <script src="js/services/freelancer.js"></script>
-    <script src="js/inicio.js"></script>
-    <script src="js/login-freelancer.js"></script>
-    <script src="js/freelancer.js"></script>
-    <script src="js/barra-superior.js"></script>
-    <title>HelpPet</title>
+    <script type="text/javascript" src="js/main.js"></script>
+    
+    <script type="text/javascript" src="js/services/login.js"></script>
+    <script type="text/javascript" src="js/services/plano.js"></script>
+    <script type="text/javascript" src="js/services/trabalho.js"></script>
+    <script type="text/javascript" src="js/services/freelancer.js"></script>
+    <script type="text/javascript" src="js/services/especialidade.js"></script>
+    
+    <script type="text/javascript" src="js/barra-superior.js"></script>
+    
+    <script type="text/javascript" src="js/inicio.js"></script>
+    
+    <script type="text/javascript" src="js/login-freelancer.js"></script>
+    <script type="text/javascript" src="js/cadastra-freelancer.js"></script>
+    
+    <script type="text/javascript" src="js/controller/freelancer/dados.js"></script>
+    <script type="text/javascript" src="js/controller/freelancer/trabalho-andamento.js"></script>
+    <script type="text/javascript" src="js/controller/freelancer/trabalho-concluido.js"></script>
+    <script type="text/javascript" src="js/controller/freelancer/trabalho-disponivel.js"></script>
+    <title>MporN</title>
 </head>
 <body ng-app="mporn" ng-controller="MainController">
     <div ng-include src="'views/barra-superior.html'"></div>
