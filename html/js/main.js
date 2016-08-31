@@ -7,11 +7,17 @@ app.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'views/inicio.html',
         controller: 'InicioController'
     }).when('/login/freelancer', {
-        templateUrl: 'views/login-freelancer.html',
+        templateUrl: 'views/login/freelancer.html',
         controller: 'LoginFreelancerController'
+    }).when('/login/cliente', {
+        templateUrl: 'views/login/cliente.html',
+        controller: 'LoginClienteController'
     }).when('/cadastro/freelancer', {
-        templateUrl: 'views/cadastra-freelancer.html',
+        templateUrl: 'views/cadastro/freelancer.html',
         controller: 'CadastroFreelancerController'
+    }).when('/cadastro/cliente', {
+        templateUrl: 'views/cadastro/cliente.html',
+        controller: 'CadastroClienteController'
     }).when('/freelancer', {
         redirectTo: '/freelancer/disponivel'
     }).when('/freelancer/disponivel', {

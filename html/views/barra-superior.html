@@ -6,21 +6,26 @@
       </a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav" ng-if="getTelaAtiva().startsWith('/freelancer/')">
-      
-      
-      <li ng-class="{'active' : isTelaAtiva('/freelancer/disponivel')}"><a ng-href="#/freelancer/disponivel">Trabalhos Disponíveis</a></li>
-      <li ng-class="{'active' : isTelaAtiva('/freelancer/andamento')}"><a ng-href="#/freelancer/andamento">Trabalhos em Andamento</a></li>
-      <li ng-class="{'active' : isTelaAtiva('/freelancer/concluido')}"><a ng-href="#/freelancer/concluido">Trabalhos Concluídos</a></li>
-      <li ng-class="{'active' : isTelaAtiva('/freelancer/dados')}"><a ng-href="#/freelancer/dados">Alterar Info</a></li>
-      
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><span>Login:</span></li>
-       <!-- TODO: colocar em class "active" quando estiver em sua pagina -->
-      <li><a href="#/login/cliente">Cliente</a></li>
-      <li><a href="#/login/freelancer">Freelancer</a></li>
-      <li><a href="#/login/admin">Admin</a></li>
-    </ul>
-  </div>
+      <ul class="nav navbar-nav" ng-show="getTelaAtiva().startsWith('/freelancer/')">
+        <li ng-class="{'active' : isTelaAtiva('/freelancer/disponivel')}"><a ng-href="#/freelancer/disponivel">Trabalhos Disponíveis</a></li>
+        <li ng-class="{'active' : isTelaAtiva('/freelancer/andamento')}"><a ng-href="#/freelancer/andamento">Trabalhos em Andamento</a></li>
+        <li ng-class="{'active' : isTelaAtiva('/freelancer/concluido')}"><a ng-href="#/freelancer/concluido">Trabalhos Concluídos</a></li>
+        <li ng-class="{'active' : isTelaAtiva('/freelancer/dados')}"><a ng-href="#/freelancer/dados">Alterar Info</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- TODO: colocar em class "active" quando estiver em sua pagina -->
+        <li class="dropdown" ng-class="{open: dataBarraSuperior.dropDownLogin}"
+          ng-hide="getTelaAtiva().startsWith('/freelancer/') || getTelaAtiva().startsWith('/cliente/') || getTelaAtiva().startsWith('/admin/')"
+          ng-mouseleave="dataBarraSuperior.dropDownLogin = false" ng-mouseenter="dataBarraSuperior.dropDownLogin = true">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#/login/cliente">Cliente</a></li>
+            <li><a href="#/login/freelancer">Freelancer</a></li>
+            <li><a href="#/login/admin">Admin</a></li>
+          </ul>
+        </li>
+        <!-- TODO: logout -->
+        <li><a href="#/" ng-show="getTelaAtiva().startsWith('/freelancer/') || getTelaAtiva().startsWith('/cliente/') || getTelaAtiva().startsWith('/admin/')">Logout</a></li>
+      </ul>
+    </div>
 </nav>
