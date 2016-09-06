@@ -1,19 +1,23 @@
 <?php
-//implementação para teste do frontend:
 header('Content-type: application/json; charset=utf-8');
 
 require_once("../config.php");
 
 $input = @json_decode(file_get_contents("php://input"));
 
-
-if(!isset($input->nome)){echo json_encode(['resultado' => false]); exit;}
-if(!isset($input->email)){echo json_encode(['resultado' => false]); exit;}
+if($input == null or !isset($input->nome) or !isset($input->email) or !isset($input->cpfcnpj) 
+        or !isset($input->senha) or !isset($input->especialidade)) {
+    echo json_encode(['resultado' => false, 'mensagem' => "Requisição invalida"]);
+    exit;
+}
 
 try{
     
     $pdo = new PDO($dsn, $user, $password);
-    $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
+    if($debug) {
+        //permite que mensagens de erro sejam mostradas
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    }
   
     $sql = "INSERT INTO freelancer (nome, email, cpf, senha) VALUES (:nome, :email, :cpf, :senha)";
     
@@ -25,10 +29,15 @@ try{
     $stmt->execute();
     
     $id_freelancer = $pdo->lastInsertId();
+    
+    if($id_freelancer == 0) {
+        //TODO: Enviar a mensagem de erro retornada pelo PDO
+        echo json_encode(['resultado' => false, 'mensagem' => "Não foi possivel realizar o Cadastro"]);
+        exit;
+    }
    
     foreach ($input->especialidade as $esp){
-     
-        $sql = "Insert into freelancer_especialidade values (:free,:esp)";
+        $sql = "INSERT INTO freelancer_especialidade VALUES (:free, :esp)";
         
         $stmt = $pdo->prepare( $sql );
         $stmt->bindParam(':free', $id_freelancer, PDO::PARAM_INT);
@@ -39,8 +48,7 @@ try{
     echo json_encode(['resultado' => true]);
     
 } catch (PDOException $e) {
-    //O retorno é todo em JSON, jamas faça isso:
-    //echo 'Connection failed: ' . $e->getMessage();
+    //TODO: Enviar a mensagem de erro retornada pelo PDO
     echo json_encode(['resultado' => false, 'mensagem' => 'Erro no Banco de Dados']);
 }
 
