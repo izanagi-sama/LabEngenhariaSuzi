@@ -3,7 +3,7 @@ header('Content-type: application/json; charset=utf-8');
 
 use \Firebase\JWT\JWT;
 require_once("../vendor/autoload.php");
-require_once("../config.php");
+require_once("../config/config.php");
 
 // converto o input em json; o "@" remove a mensagem de erro (caso existir)
 $input = @json_decode(file_get_contents("php://input"));
@@ -14,10 +14,14 @@ if($input == null or !isset($input->login) or !isset($input->senha)) {
 }
 
 try{
-    $pdo = new PDO($dsn, $user, $password);
+    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password);
+    if($config->debug) {
+        //permite que mensagens de erro sejam mostradas
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    }
     $stmt = $pdo->prepare("SELECT * FROM freelancer WHERE email = :login AND senha = :senha");
-    $stmt->bindParam(':login',$input->login);
-    $stmt->bindParam(':senha',md5($input->senha));
+    $stmt->bindParam(':login', $input->login, PDO::PARAM_STR);
+    $stmt->bindParam(':senha', hash('sha256', $input->senha, false), PDO::PARAM_STR);
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch(PDOException $e){

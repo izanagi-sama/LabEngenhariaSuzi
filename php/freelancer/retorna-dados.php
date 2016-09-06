@@ -3,13 +3,17 @@ header('Content-type: application/json; charset=utf-8');
 
 use \Firebase\JWT\JWT;
 require_once("../vendor/autoload.php");
-require_once("../config.php");
+require_once("../config/config.php");
 include("../recebe-jwt.php");
 
 $id = $token->data->id;
 
 try{
-    $pdo = new PDO($dsn, $user, $password);
+    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password);
+    if($config->debug) {
+        //permite que mensagens de erro sejam mostradas
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    }
    
     $stmt = $pdo->prepare('SELECT nome,email,cpf AS cpfcnpj FROM freelancer WHERE id_freelancer = :id');
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
