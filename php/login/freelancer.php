@@ -11,8 +11,13 @@ header('Content-type: application/json; charset=utf-8');
 // converto o input em json; o "@" remove a mensagem de erro (caso existir)
 $input = @json_decode(file_get_contents("php://input"));
 
+
+//Teste interno
+//$input = ["login"=>"fabriciopbrb@gmail.com","senha"=>"asdf"];
+
 //caso não receber o login e senha, retornar um erro
-if($input == null or !isset($input->login) or !isset($input->senha)) {
+if($input == null or !isset($input['login']) or !isset($input['senha'])) {
+    
     //envia resposta de erro
     echo json_encode(['resultado' => false, 'mensagem' => 'Requisição invalida']);
     exit;
@@ -27,17 +32,46 @@ $token = [
     'exp'  => $horaAtual + (60*60),                  // Expire
     'data' => null                                   // Data to be signed
 ];
+<<<<<<< HEAD
 
 //TODO: Verifica no Banco de dados
 if($input->login == "admin@exemple.com" or $input->senha == "123qwe") { //usuario é valido
     //TODO: recveber id de dentro do DB, enquanto isso fica de exemplo
     $id = 1;
+=======
+
+try{
+$pdo = new PDO($dsn, $user, $password);
+$stmt = $pdo->prepare("SELECT * FROM freelancer WHERE email = :login AND senha = :senha");
+$stmt->bindParam(':login',$input['login']);
+$stmt->bindParam(':senha',md5($input['senha']));
+$stmt->execute();
+$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch(PDOException $e){
+    echo json_encode(['resultado' => false, 'mensagem' => 'Erro no Banco de Dados']);
+        exit;
+}
+
+ if($resultado) {
+     
+    $id = $resultado['id_freelancer'];
+>>>>>>> upstream-fabricio/patch-7
     $usuario = (object) ['id' => $id, 'email' => $input->login];
     $token['data'] = $usuario; //adiciona o login aos dados que seram assinados pelo jwt
     $jwt = JWT::encode($token, $JWTkey, 'HS256'); //assina os dados do usuario
     echo json_encode(['resultado' => true, 'jwt' => $jwt]); //envia a resposta json
+<<<<<<< HEAD
     
 } else { //não encontrou o usuario
     //envia resposta de erro
     echo json_encode(['resultado' => false, 'mensagem' => 'Login ou Senha Invalido']);
 }
+=======
+     
+       
+    } else {
+        echo json_encode(['resultado' => false]);
+        exit;
+    }
+>>>>>>> upstream-fabricio/patch-7
