@@ -16,7 +16,7 @@ $input = @json_decode(file_get_contents("php://input"));
 //$input = ["login"=>"fabriciopbrb@gmail.com","senha"=>"asdf"];
 
 //caso não receber o login e senha, retornar um erro
-if($input == null or !isset($input['login']) or !isset($input['senha'])) {
+if($input == null or !isset($input->login) or !isset($input->senha)) {
     
     //envia resposta de erro
     echo json_encode(['resultado' => false, 'mensagem' => 'Requisição invalida']);
@@ -36,8 +36,8 @@ $token = [
 try{
 $pdo = new PDO($dsn, $user, $password);
 $stmt = $pdo->prepare("SELECT * FROM freelancer WHERE email = :login AND senha = :senha");
-$stmt->bindParam(':login',$input['login']);
-$stmt->bindParam(':senha',md5($input['senha']));
+$stmt->bindParam(':login',$input->login);
+$stmt->bindParam(':senha',md5($input->senha));
 $stmt->execute();
 $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
