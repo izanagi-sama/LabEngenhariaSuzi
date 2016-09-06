@@ -63,7 +63,7 @@
                 <div class="form-group" ng-class="{'has-error': dataCadastraFreelancer.erro.especialidade.requerido}">
                     <label for="especialidadeInput" class="col-md-3 control-label">Especialidades:</label>
                     <div class="col-md-9">
-                        <select id="especialidadeInput" name="especialidadeInput" class="selectpicker form-control" required multiple ng-model="dataCadastraFreelancer.dados.especialidades">
+                        <select id="especialidadeInput" name="especialidadeInput" class="selectpicker form-control" required multiple ng-model="dataCadastraFreelancer.data.especialidade">
                             <option ng-repeat="especialidade in dataCadastraFreelancer.todasEspecialidades" value="{{especialidade.id}}">{{especialidade.nome}}</option>
                         </select>
                         <span class="help-block" ng-show="dataCadastraFreelancer.erro.especialidade.requerido">Especialidade Requerida</span>
