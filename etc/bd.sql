@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `freelancer` (
   `nome` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `cpf` varchar(11) NOT NULL,
-  `senha` varchar(30) NOT NULL
+  `senha` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
