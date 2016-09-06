@@ -40,7 +40,7 @@ if ($id !== null){
   
     
     /*Não dá pra usar especialidades na mesma tela que altera dados... as especialidades têm que ser acrescentadas em outra tela...
-     * Ou a mesma tela vai fazer uma chamada pra ir acrescentando ou deletando uma especialidade por vez....
+      Ou a mesma tela vai fazer uma chamada pra ir acrescentando ou deletando uma especialidade por vez....
      */
     
     
@@ -58,7 +58,7 @@ try{
     $stmt->bindParam(':email', $freela['email']);
     $stmt->bindParam(':cpf', $freela['cpf']);
     $stmt->bindParam(':senha', $freela['senha']);
-    $stmt->bindParam(':id_freelancer', $freela['id_freelancer'],PDO::PARAM_INT);
+    $stmt->bindParam(':id_freelancer', $id,PDO::PARAM_INT);
     
     $result = $stmt->execute();
     
