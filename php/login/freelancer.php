@@ -1,4 +1,10 @@
 <?php
+
+use \Firebase\JWT\JWT;
+require_once("../vendor/autoload.php");
+
+require_once("../config.php");
+
 //implementação para teste do frontend:
 header('Content-type: application/json; charset=utf-8');
 
@@ -12,11 +18,26 @@ if($input == null or !isset($input->login) or !isset($input->senha)) {
     exit;
 }
 
-if($input->login != "admin" or $input->senha != "123qwe") {
-    //envia resposta de erro
-    echo json_encode(['resultado' => false, 'mensagem' => 'Login ou Senha Invalido']); 
-    exit;
-}
+$horaAtual = time();
+$token = [
+    'iat'  => $horaAtual,                            // Issued at: time when the token was generated
+    'jti'  => base64_encode(mcrypt_create_iv(32)),   // Json Token Id: an unique identifier for the token
+    'iss'  => $nomeServidor,                         // Issuer
+    'nbf'  => $horaAtual,                            // Not before
+    'exp'  => $horaAtual + (60*60),                  // Expire
+    'data' => null                                   // Data to be signed
+];
 
-echo json_encode(['resultado' => true, 'jwt' => 'asdasdasdasdsdgh']);
-exit;
+//TODO: Verifica no Banco de dados
+if($input->login == "admin@exemple.com" or $input->senha == "123qwe") { //usuario é valido
+    //TODO: recveber id de dentro do DB, enquanto isso fica de exemplo
+    $id = 1;
+    $usuario = (object) ['id' => $id, 'email' => $input->login];
+    $token['data'] = $usuario; //adiciona o login aos dados que seram assinados pelo jwt
+    $jwt = JWT::encode($token, $JWTkey, 'HS256'); //assina os dados do usuario
+    echo json_encode(['resultado' => true, 'jwt' => $jwt]); //envia a resposta json
+    
+} else { //não encontrou o usuario
+    //envia resposta de erro
+    echo json_encode(['resultado' => false, 'mensagem' => 'Login ou Senha Invalido']);
+}
