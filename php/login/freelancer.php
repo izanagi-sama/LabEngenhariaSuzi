@@ -32,13 +32,6 @@ $token = [
     'exp'  => $horaAtual + (60*60),                  // Expire
     'data' => null                                   // Data to be signed
 ];
-<<<<<<< HEAD
-
-//TODO: Verifica no Banco de dados
-if($input->login == "admin@exemple.com" or $input->senha == "123qwe") { //usuario é valido
-    //TODO: recveber id de dentro do DB, enquanto isso fica de exemplo
-    $id = 1;
-=======
 
 try{
 $pdo = new PDO($dsn, $user, $password);
@@ -56,22 +49,12 @@ $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
  if($resultado) {
      
     $id = $resultado['id_freelancer'];
->>>>>>> upstream-fabricio/patch-7
     $usuario = (object) ['id' => $id, 'email' => $input->login];
     $token['data'] = $usuario; //adiciona o login aos dados que seram assinados pelo jwt
     $jwt = JWT::encode($token, $JWTkey, 'HS256'); //assina os dados do usuario
     echo json_encode(['resultado' => true, 'jwt' => $jwt]); //envia a resposta json
-<<<<<<< HEAD
     
 } else { //não encontrou o usuario
     //envia resposta de erro
     echo json_encode(['resultado' => false, 'mensagem' => 'Login ou Senha Invalido']);
 }
-=======
-     
-       
-    } else {
-        echo json_encode(['resultado' => false]);
-        exit;
-    }
->>>>>>> upstream-fabricio/patch-7
