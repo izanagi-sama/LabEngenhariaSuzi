@@ -81,6 +81,21 @@ CREATE TABLE IF NOT EXISTS `freelancer` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE IF NOT EXISTS `cliente` (
+`id_cliente` int(10) unsigned NOT NULL,
+  `nome` varchar(128) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `cpfcnpj` varchar(11) NOT NULL,
+  `senha` varchar(65) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Indexes for dumped tables
 --
 
@@ -95,6 +110,12 @@ ALTER TABLE `especialidade`
 --
 ALTER TABLE `freelancer`
  ADD PRIMARY KEY (`id_freelancer`);
+ 
+--
+-- Indexes for table `cliente`
+--
+ALTER TABLE `cliente`
+ ADD PRIMARY KEY (`id_cliente`);
 
 --
 -- Indexes for table `freelancer_especialidade`
@@ -116,6 +137,11 @@ MODIFY `id_especialidade` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 --
 ALTER TABLE `freelancer`
 MODIFY `id_freelancer` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `freelancer`
+--
+ALTER TABLE `cliente`
+MODIFY `id_cliente` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
