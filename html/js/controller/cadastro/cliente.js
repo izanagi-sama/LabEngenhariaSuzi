@@ -1,4 +1,4 @@
-app.controller("CadastroClienteController", function($scope, $location, store, jwtHelper) {
+app.controller("CadastroClienteController", function($scope, $location, store, jwtHelper, ClienteService) {
     $scope.dataCadastraCliente = {
         erro: {
                 mensagem: null,
@@ -50,9 +50,8 @@ app.controller("CadastroClienteController", function($scope, $location, store, j
         //verificações:
         if(!cadastraValido()) return;
         
-        /**TODO: ClienteService
         $scope.dataCadastraCliente.loading += 1;
-        var resposta = FreelancerService.cadastra(usuario);
+        var resposta = ClienteService.cadastra(usuario);
             resposta.then(function(data) {
             if(data.resultado == true) {
                 $scope.dataCadastraCliente.loading -= 1;
@@ -61,7 +60,6 @@ app.controller("CadastroClienteController", function($scope, $location, store, j
                 $scope.dataCadastraCliente.erro.mensagem = "Erro no Cadastro: " + data.mensagem;
                 $scope.dataCadastraCliente.loading -= 1;
             }
-        });/**/
+        });
     };
-    
 });
