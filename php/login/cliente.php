@@ -13,6 +13,7 @@ if($input == null or !isset($input->login) or !isset($input->senha)) {
     exit;
 }
 
+$id = null;
 try{
     $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password);
     if($config->debug) {
@@ -24,6 +25,8 @@ try{
     $stmt->bindParam(':senha', hash('sha256', $input->senha, false), PDO::PARAM_STR);
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $id = $resultado[0]['id_cliente'];
+    //TODO: verficar se o id é null
 } catch(PDOException $e){
     //TODO: receber mensagem de erro do PDO
     echo json_encode(['resultado' => false, 'mensagem' => 'Erro no Banco de Dados']);
@@ -40,7 +43,6 @@ if($resultado) {
         'exp'  => $horaAtual + (60*60),                  // Expire
         'data' => null                                   // Data to be signed
     ];
-    $id = $resultado['id_cliente'];
     $usuario = (object) ['id' => $id, 'tipo' => 'cliente'];
     $token['data'] = $usuario; //adiciona o login aos dados que seram assinados pelo jwt
     $jwt = JWT::encode($token, $config->jwtKey, 'HS256'); //assina os dados do usuario

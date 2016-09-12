@@ -15,7 +15,7 @@ try{
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
    
-    $stmt = $pdo->prepare('SELECT nome,email,cpf AS cpfcnpj FROM freelancer WHERE id_freelancer = :id');
+    $stmt = $pdo->prepare('SELECT nome,email,cpfcnpj FROM freelancer WHERE id_freelancer = :id');
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     
     $stmt->execute();
