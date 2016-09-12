@@ -13,7 +13,7 @@ if (!$jwt) { //verfifica se o usuario foi autenticado
 $horaAtual = time();
 $token = '';
 try{
-    $token = JWT::decode($jwt, $config->jwtKey, array('HS256')); //verifica se o JWT ainda é valido
+    $token = JWT::decode($jwt,$config->jwtKey, array('HS256')); //verifica se o JWT ainda é valido
 }catch(BeforeValidException $e) {
     echo json_encode(['resultado' => false, 'mensagem' => 'Autenticação feita no futuro (verifique relógio): ' . $e->getMessage()]); //envia resposta de erro
     exit;
