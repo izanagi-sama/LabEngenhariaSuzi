@@ -43,7 +43,7 @@ if($resultado) {
     $id = $resultado['id_cliente'];
     $usuario = (object) ['id' => $id, 'tipo' => 'cliente'];
     $token['data'] = $usuario; //adiciona o login aos dados que seram assinados pelo jwt
-    $jwt = JWT::encode($token, $JWTkey, 'HS256'); //assina os dados do usuario
+    $jwt = JWT::encode($token, $config->jwtKey, 'HS256'); //assina os dados do usuario
     echo json_encode(['resultado' => true, 'jwt' => $jwt]); //envia a resposta json
     
 } else { //não encontrou o usuario
