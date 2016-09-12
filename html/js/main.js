@@ -20,6 +20,10 @@ app.config(['$routeProvider', function($routeProvider) {
         controller: 'CadastroClienteController'
     }).when('/freelancer', {
         redirectTo: '/freelancer/disponivel'
+    }).when('/cliente', {
+        redirectTo: '/cliente/andamento'
+    }).when('/cliente/andamento', {
+        templateUrl: 'views/cliente/trabalho-andamento.html'
     }).when('/freelancer/disponivel', {
         templateUrl: 'views/freelancer/trabalho-disponivel.html',
         controller: 'FreelancerTrabalhoDisponivelController'
