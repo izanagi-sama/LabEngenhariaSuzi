@@ -14,13 +14,10 @@ header('Content-type: application/json; charset=utf-8');
 
 use \Firebase\JWT\JWT;
 require_once("vendor/autoload.php");
-require_once("config/config.php");
-include("recebe-jwt.php");
-
-$id = $token->data->id;
+require_once("config.php");
 
 try{
-    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password);
+    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     if($config->debug) {
         //permite que mensagens de erro sejam mostradas
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
@@ -30,8 +27,8 @@ try{
     $stmt->execute();
     
     if($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
-            $dados = ['planos' => $row];
-           $return = json_encode($dados);
+        $dados = ['planos' => $row];
+        $return = json_encode($dados);
         echo $return;
     } else {
         //TODO: Enviar a mensagem de erro retornada pelo PDO

@@ -3,7 +3,7 @@ header('Content-type: application/json; charset=utf-8');
 
 use \Firebase\JWT\JWT;
 require_once("../vendor/autoload.php");
-require_once("../config/config.php");
+require_once("../config.php");
 
 // converto o input em json; o "@" remove a mensagem de erro (caso existir)
 $input = @json_decode(file_get_contents("php://input"));
@@ -15,17 +15,18 @@ if($input == null or !isset($input->login) or !isset($input->senha)) {
 
 $id = null;
 try{
-    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password);
+    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     if($config->debug) {
         //permite que mensagens de erro sejam mostradas
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
-    $stmt = $pdo->prepare("SELECT id_freelancer FROM freelancer WHERE email = :login AND senha = :senha");
+    $stmt = $pdo->prepare("SELECT id FROM freelancer WHERE email = :login AND senha = :senha");
     $stmt->bindParam(':login', $input->login, PDO::PARAM_STR);
-    $stmt->bindParam(':senha', hash('sha256', $input->senha, false), PDO::PARAM_STR);
+    $hash = hash('sha256', $input->senha, false);
+    $stmt->bindParam(':senha', $hash, PDO::PARAM_STR);
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $id = $resultado[0]['id_freelancer'];
+    $id = $resultado[0]['id'];
     //TODO: verficar se o id é null
 } catch(PDOException $e){
     //TODO: receber mensagem de erro do PDO
