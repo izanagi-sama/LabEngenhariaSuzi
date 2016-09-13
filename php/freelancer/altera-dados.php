@@ -3,7 +3,7 @@ header('Content-type: application/json; charset=utf-8');
 
 use \Firebase\JWT\JWT;
 require_once("../vendor/autoload.php");
-require_once("../config/config.php");
+require_once("../config.php");
 include("../recebe-jwt.php");
 
 $input = @json_decode(file_get_contents("php://input"));
@@ -38,7 +38,7 @@ function esp($pdo, $esp, $id){
 }
 
 try{
-    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password);
+    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     if($config->debug) {
         //permite que mensagens de erro sejam mostradas
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
@@ -47,13 +47,13 @@ try{
     if(isset($input->senha)) 
          $query .= ', senha = :senha ';
     
-    $query .= ' WHERE id_freelancer = :id_freelancer';
+    $query .= ' WHERE id = :id';
     
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':nome',$input->nome, PDO::PARAM_STR);
     $stmt->bindParam(':email', $input->email, PDO::PARAM_STR);
     $stmt->bindParam(':cpfcnpj', $input->cpfcnpj, PDO::PARAM_STR);
-    $stmt->bindParam(':id_freelancer', $id, PDO::PARAM_INT, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT, PDO::PARAM_STR);
     
     if(isset($input->senha)) 
         $stmt->bindParam(':senha', hash('sha256', $input->senha, false), PDO::PARAM_STR);

@@ -3,19 +3,19 @@ header('Content-type: application/json; charset=utf-8');
 
 use \Firebase\JWT\JWT;
 require_once("../vendor/autoload.php");
-require_once("../config/config.php");
+require_once("../config.php");
 include("../recebe-jwt.php");
 
 $id = $token->data->id;
 
 try{
-    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password);
+    $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     if($config->debug) {
         //permite que mensagens de erro sejam mostradas
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
    
-    $stmt = $pdo->prepare('SELECT nome,email,cpfcnpj FROM freelancer WHERE id_freelancer = :id');
+    $stmt = $pdo->prepare('SELECT nome,email,cpfcnpj FROM freelancer WHERE id = :id');
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     
     $stmt->execute();
