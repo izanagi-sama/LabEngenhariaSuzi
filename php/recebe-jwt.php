@@ -1,8 +1,6 @@
 <?php
 
 use \Firebase\JWT\JWT;
-require_once("../config/config.php");
-
 //recebe o JWT
 $jwt = sscanf(apache_request_headers()["authorization"], 'Bearer %s')[0];
 if (!$jwt) { //verfifica se o usuario foi autenticado

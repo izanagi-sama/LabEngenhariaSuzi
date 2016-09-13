@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `mporn`
 --
-CREATE DATABASE IF NOT EXISTS `mporn` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `mporn` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `mporn`;
 
 -- --------------------------------------------------------
@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS `freelancer_especialidade`;
 CREATE TABLE IF NOT EXISTS `freelancer_especialidade` (
   `id_freelancer` int(10) unsigned NOT NULL,
   `id_especialidade` int(10) unsigned NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `especialidade`
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `especialidade` (
 `id_especialidade` int(10) unsigned NOT NULL,
   `nome` varchar(40) NOT NULL,
   `descricao` varchar(128) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `especialidade`
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `freelancer` (
   `email` varchar(128) NOT NULL,
   `cpfcnpj` varchar(11) NOT NULL,
   `senha` varchar(65) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `email` varchar(128) NOT NULL,
   `cpfcnpj` varchar(11) NOT NULL,
   `senha` varchar(65) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -156,3 +156,10 @@ ADD CONSTRAINT `freelancer_especialidade_ibfk_1` FOREIGN KEY (`id_freelancer`) R
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `freelancer`
+--
+
