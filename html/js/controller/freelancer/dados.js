@@ -1,28 +1,29 @@
 app.controller("FreelancerDadosController", function($scope, $location, store, jwtHelper, TrabalhoService, FreelancerService, EspecialidadeService) {
     $scope.dataFreelancer = {
-        loading: 0,        erro: {
-                mensagem: null,
-                nome: {
-                    requerido: false,
-                    tamanho: false
-                    },
-                email: {
-                    requerido: false,
-                    invalido: false
-                    },
-                cpfcnpj: {
-                    requerido: false,
-                    invalido: false
-                    },
-                senha: {
-                    requerido: false,
-                    tamanho: false,
-                    difere: false
-                    },
-                especialidade: {
-                    requerido: false
-                    }
+        loading: 0,
+        erro: {
+            mensagem: null,
+            nome: {
+                requerido: false,
+                tamanho: false
                 },
+            email: {
+                requerido: false,
+                invalido: false
+                },
+            cpfcnpj: {
+                requerido: false,
+                invalido: false
+                },
+            senha: {
+                requerido: false,
+                tamanho: false,
+                difere: false
+                },
+            especialidade: {
+                requerido: false
+                }
+            },
         dados: {}
     };    
     
@@ -36,16 +37,17 @@ app.controller("FreelancerDadosController", function($scope, $location, store, j
         $scope.dataFreelancer.erro.cpfcnpj.requerido = $scope.cadastroForm.cpfcnpjInput.$error.required === true;
         $scope.dataFreelancer.erro.cpfcnpj.invalido = //se não for preenchido não verfica por validade
             (!$scope.dataFreelancer.erro.cpfcnpj.requerido && !$scope.cadastroForm.cpfcnpjInput.$valid);
-            
-        $scope.dataFreelancer.erro.senha.requerido = $scope.cadastroForm.senhaInput.$error.required === true;
-        $scope.dataFreelancer.erro.senha.tamanho = $scope.cadastroForm.senhaInput.$error.minlength === true;
         
+        //senha não é obrigatorio
+        //$scope.dataFreelancer.erro.senha.requerido = $scope.cadastroForm.senhaInput.$error.required === true;
+        //$scope.dataFreelancer.erro.senha.tamanho = $scope.cadastroForm.senhaInput.$error.minlength === true;
         
         $scope.dataFreelancer.erro.especialidade.requerido = $scope.cadastroForm.especialidadeInput.$error.required === true;
         
         //Verfica se as senhas são iguais, mas somente se a primeira é maior que o minimo
-        $scope.dataFreelancer.erro.senha.difere = !$scope.dataFreelancer.erro.senha.tamanho &&
-            ($scope.dataFreelancer.senha2 != $scope.dataFreelancer.data.senha);
+        if($scope.dataFreelancer.dados.hasOwnProperty('senha') && $scope.dataFreelancer.dados.senha != null && $scope.dataFreelancer.dados.senha != '')
+            $scope.dataFreelancer.erro.senha.difere = !$scope.dataFreelancer.erro.senha.tamanho &&
+                ($scope.dataFreelancer.senha2 != $scope.dataFreelancer.dados.senha);
         
         return $scope.cadastroForm.$valid;
     }
@@ -59,9 +61,9 @@ app.controller("FreelancerDadosController", function($scope, $location, store, j
             if (data.resultado) {
                 $location.path('/freelancer/disponivel');
                 $scope.dataFreelancer.loading -= 1;
-            }
-            else {
-                $scope.dataFreelancer.erro = "Erro ao receber dados do servidor"; //TODO: mensagem de erro do servidor
+            } else {
+                $scope.dataFreelancer.erro.mensagem = "Erro ao receber dados do servidor"; //TODO: mensagem de erro do servidor
+                $scope.dataFreelancer.loading -= 1;
             }
         });
     }
@@ -72,18 +74,18 @@ app.controller("FreelancerDadosController", function($scope, $location, store, j
             $scope.dataFreelancer.dados = data;
             $scope.dataFreelancer.senha2 = $scope.dataFreelancer.dados.senha;
             $scope.dataFreelancer.loading -= 1;
-        }
-        else {
-            $scope.dataFreelancer.erro = "Erro ao receber dados do servidor"; //TODO: mensagem de erro do servidor
+        } else {
+            $scope.dataFreelancer.erro.mensagem = "Erro ao receber dados do servidor"; //TODO: mensagem de erro do servidor
+            $scope.dataFreelancer.loading -= 1;
         }
     });
     EspecialidadeService.getEspecialidades().then(function(data) {
         if (data.especialidades) {
             $scope.dataFreelancer.todasEspecialidades = data.especialidades;
             $scope.dataFreelancer.loading -= 1;
-        }
-        else {
-            $scope.dataFreelancer.erro = "Erro ao receber dados do servidor"; //TODO: mensagem de erro do servidor
+        } else {
+            $scope.dataFreelancer.erro.mensagem = "Erro ao receber dados do servidor"; //TODO: mensagem de erro do servidor
+            $scope.dataFreelancer.loading -= 1;
         }
     });
 })

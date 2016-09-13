@@ -9,7 +9,7 @@ include("../recebe-jwt.php");
 $input = @json_decode(file_get_contents("php://input"));
 
 if($input == null or !isset($input->nome) or !isset($input->email) or !isset($input->cpfcnpj) 
-        or !isset($input->senha) or !isset($input->especialidade)) {
+        or !isset($input->especialidade)) {
     echo json_encode(['resultado' => false, 'mensagem' => "Requisição invalida"]);
     exit;
 }
@@ -43,18 +43,24 @@ try{
         //permite que mensagens de erro sejam mostradas
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
-    $query = 'UPDATE freelancer SET nome = :nome, email = :email, cpfcnpj = :cpfcnpj, senha = :senha WHERE id_freelancer = :id_freelancer';
+    $query = 'UPDATE freelancer SET nome = :nome, email = :email, cpfcnpj = :cpfcnpj';
+    if(isset($input->senha)) 
+         $query .= ', senha = :senha ';
+    
+    $query .= ' WHERE id_freelancer = :id_freelancer';
     
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':nome',$input->nome, PDO::PARAM_STR);
     $stmt->bindParam(':email', $input->email, PDO::PARAM_STR);
     $stmt->bindParam(':cpfcnpj', $input->cpfcnpj, PDO::PARAM_STR);
-    $stmt->bindParam(':senha', hash('sha256', $input->senha, false), PDO::PARAM_STR);
     $stmt->bindParam(':id_freelancer', $id, PDO::PARAM_INT, PDO::PARAM_STR);
+    
+    if(isset($input->senha)) 
+        $stmt->bindParam(':senha', hash('sha256', $input->senha, false), PDO::PARAM_STR);
     
     $result = $stmt->execute();
     
-    esp($pdo, $esp, $id);
+    esp($pdo, $input->especialidade, $id);
     
     if(!$result){
         //TODO: Enviar a mensagem de erro retornada pelo PDO
