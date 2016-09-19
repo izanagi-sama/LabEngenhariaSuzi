@@ -1,15 +1,4 @@
 <?php
-//implementação para teste do frontend:
-/*
-header('Content-type: application/json; charset=utf-8');
-echo json_encode(['trabalhos' => [ 
-        [ 'id' => 4, 'nome' => 'Trabalho 4', 'plano' => 2, 'descricao' => 'asdasd' ],
-        [ 'id' => 7, 'nome' => 'Trabalho 7', 'plano' => 2, 'descricao' => 'asdasd' ]
-        ]]);
-exit;
-
-*/
-
 header('Content-type: application/json; charset=utf-8');
 
 use \Firebase\JWT\JWT;
@@ -25,47 +14,16 @@ try{
         //permite que mensagens de erro sejam mostradas
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
-   
-   
-   
-    $stmt = $pdo->prepare('SELECT id, nome, plano, descricao from trabalho where id_freelancer = :id AND situacao = 1;');
-    
-    
-    
+    $stmt = $pdo->prepare('SELECT id, nome, plano, descricao from trabalho where id_freelancer = :id AND situacao = 1');
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     
-    $stmt->execute();
-    $trab = ['trabalhos'=>[]];
-    if($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
-       // echo json_encode($row);
-       
-       
-       foreach($row as $linha){
-          $trab['trabalhos'][] = $linha; 
-          
-       }
-       
-       echo json_encode($trab);
-
-    } else {
-        //TODO: Enviar a mensagem de erro retornada pelo PDO
-        echo json_encode(['resultado' => false, 'mensagem' => 'Erro ao retornar dados do Banco de Dados']);
-    }
+    $stmt->execute(); //TDOO: verficar por erros
+    $trab = array();
+    $trab['trabalhos'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($trab);
     
 } catch (PDOException $e) {
     echo json_encode(['resultado' => false, 'mensagem' => 'Connection failed: ' . $e->getMessage()]);
-}
-
-
-function utf8_converter($array)
-{
-    array_walk_recursive($array, function(&$item, $key){
-        if(!mb_detect_encoding($item, 'utf-8', true)){
-                $item = utf8_encode($item);
-        }
-    });
- 
-    return $array;
 }
 
 $conn = null;
