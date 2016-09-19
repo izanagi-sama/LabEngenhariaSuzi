@@ -10,10 +10,6 @@ echo json_encode(['especialidades' => [
 exit;
 /**/
 
-/**/
-
-//$id = $token->data->id;
-//$id = 1;
 include_once('config.php');
 try{
     $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
