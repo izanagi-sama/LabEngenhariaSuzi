@@ -63,7 +63,7 @@ CREATE TABLE `especialidade` (
 
 LOCK TABLES `especialidade` WRITE;
 /*!40000 ALTER TABLE `especialidade` DISABLE KEYS */;
-INSERT INTO `especialidade` VALUES (1,'CSS',''),(2,'HTML',''),(3,'PHP',''),(4,'SysAdmin',''),(5,'JS,JQuery','');
+INSERT INTO `especialidade` VALUES (1,'CSS','Folha de Estilos'),(2,'HTML','Linguagem de marcação básica'),(3,'PHP','Linguagem de programação back-end'),(4,'SysAdmin',''),(5,'JS,JQuery','Linguagem de programação Front-End');
 /*!40000 ALTER TABLE `especialidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-19  4:54:56
+-- Dump completed on 2016-09-19  5:44:43
