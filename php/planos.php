@@ -26,15 +26,10 @@ try{
     $stmt = $pdo->prepare('SELECT * FROM planos');
     $stmt->execute();
     
-    if($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
-        $dados = ['planos' => $row];
-        $return = json_encode($dados);
-        echo $return;
-    } else {
-        //TODO: Enviar a mensagem de erro retornada pelo PDO
-        echo json_encode(['resultado' => false, 'mensagem' => 'Erro ao retornar dados do Banco de Dados']);
-    }
-    
+    $dados = array();
+    $dados['planos'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $return = json_encode($dados);
+    echo $return;
 } catch (PDOException $e) {
     echo json_encode(['resultado' => false, 'mensagem' => 'Connection failed: ' . $e->getMessage()]);
 }

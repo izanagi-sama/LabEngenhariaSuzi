@@ -52,7 +52,7 @@ Cadastra Freelancer: recebe as informações do freelancer e altera o banco
         retorna:
             {"resultado" : true|false, mensagem: "Mensagem de erro"}
 
-Freelancer lista trabalhos disponiveis: lista de trabalhos não acinados, e com a especialidade correta com o freelancer
+Freelancer lista trabalhos disponiveis: lista de trabalhos não assinados, e com a especialidade correta com o freelancer
     /php/freelancer/trabalho-disponivel.php
         envia:
             {"filtro" : "asdasd"} //opcional
