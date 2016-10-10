@@ -92,3 +92,18 @@ Freelancer modifica trabalho: aceita, finaliza o trabalho
     /php/freelancer/altera-trabalho.php
         envia: {trabalho:1, estado:"aceito|finalizado"} // trabalho é o id do trabalho
         retorna: {resultado: true|false, mensagem: "Mensagem de erro"}
+        
+Cliente retorna lista de trabalhos: retorna lista de trabalhos criados pelo cliente
+    /php/cliente/retorna-trabalho.php
+        envia: {id_cliente} // pelo jwt
+        retorna: {id}
+
+Cliente conclui trabalho finalizado pelo freelancer
+    /php/cliente/concluir-trabalho.php
+    envia: {id}
+    retorna: {resultado: true|false, mensagem:"mensagem de erro"}
+
+Freelancer Exibir trabalho detalhado
+    /php/freelancer/retorna-trabalho-detalhado.php
+    envia: {id} // id do trabalho que deseja obter os dados
+    retorna: {"trabalhos":[{"id":"9","nome":"Novo Trabalho 2","plano":"1","descricao":"Descricao pequena","detalhado":"Descricao detalhada"}]}

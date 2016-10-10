@@ -14,16 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE IF NOT EXISTS `mporn` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `mporn`;
-
---
--- Cria um usuario de acordo com config.php e garante o usuario completo acesso ao DB
---
-
-GRANT ALL PRIVILEGES ON `mporn` . * TO 'mporn'@'localhost';
-FLUSH PRIVILEGES;
-
 
 --
 -- Table structure for table `cliente`
@@ -39,7 +29,7 @@ CREATE TABLE `cliente` (
   `cpfcnpj` varchar(11) NOT NULL,
   `senha` varchar(65) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,11 +38,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES 
-(1,'Cliente1','cliente1@gmail.com','49290365501','fbfb386efea67e816f2dda0a8c94a98eb203757aebb3f55f183755a192d44467'), /*senha 123qwe*/
-(2,'Cliente2','cliente2@gmail.com','64219804811','fbfb386efea67e816f2dda0a8c94a98eb203757aebb3f55f183755a192d44467'), /*senha 123qwe*/
-(3,'Cliente3','cliente3@gmail.com','02931147141','fbfb386efea67e816f2dda0a8c94a98eb203757aebb3f55f183755a192d44467'), /*senha 123qwe*/
-(4,'Cliente4','cliente4@gmail.com','53803843820','fbfb386efea67e816f2dda0a8c94a98eb203757aebb3f55f183755a192d44467'); /*senha 123qwe*/
+INSERT INTO `cliente` VALUES (1,'Bracobom','contato@bracomal.com.br','04040224040','b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c'),(2,'Tecnovit','contato@tecnovit.com.br','03939223913','senha'),(3,'Acerte Compras','contato@acertecompras.com.br','03939223913','senha'),(4,'Bracomal','contato@bracomal.com.br','03939223914','b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c'),(5,'Jussara','jussa@gmail.com','03939223913','b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c'),(6,'Jussara','jussa@gmail.com','03939223913','b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,12 +63,7 @@ CREATE TABLE `especialidade` (
 
 LOCK TABLES `especialidade` WRITE;
 /*!40000 ALTER TABLE `especialidade` DISABLE KEYS */;
-INSERT INTO `especialidade` VALUES 
-(1,'CSS','Folha de Estilos'),
-(2,'HTML','Linguagem de marcação básica'),
-(3,'PHP','Linguagem de programação back-end'),
-(4,'SysAdmin',''),
-(5,'JS,JQuery','Linguagem de programação Front-End');
+INSERT INTO `especialidade` VALUES (1,'CSS','Folha de Estilos'),(2,'HTML','Linguagem de marcação básica'),(3,'PHP','Linguagem de programação back-end'),(4,'SysAdmin',''),(5,'JS,JQuery','Linguagem de programação Front-End');
 /*!40000 ALTER TABLE `especialidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,9 +90,7 @@ CREATE TABLE `freelancer` (
 
 LOCK TABLES `freelancer` WRITE;
 /*!40000 ALTER TABLE `freelancer` DISABLE KEYS */;
-INSERT INTO `freelancer` VALUES 
-(1,'Freelancer1','freelancer1@gmail.com','10355547988','fbfb386efea67e816f2dda0a8c94a98eb203757aebb3f55f183755a192d44467'), /*senha 123qwe*/
-(2,'Freelancer2','freelancer2@dipcorp.com.br','12490167898','fbfb386efea67e816f2dda0a8c94a98eb203757aebb3f55f183755a192d44467'); /*senha 123qwe*/
+INSERT INTO `freelancer` VALUES (1,'FABRICIO PINTO BARBOSA','fabriciopbrb@gmail.com','03939223913','b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c'),(2,'FABRICIO PINTO BARBOSA','fabricio@dipcorp.com.br','03939223913','b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c');
 /*!40000 ALTER TABLE `freelancer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +118,7 @@ CREATE TABLE `freelancer_especialidade` (
 
 LOCK TABLES `freelancer_especialidade` WRITE;
 /*!40000 ALTER TABLE `freelancer_especialidade` DISABLE KEYS */;
-INSERT INTO `freelancer_especialidade` VALUES (1,1),(2,1),(1,2),(2,2),(1,3),(2,3),(1,5),(2,5);
+INSERT INTO `freelancer_especialidade` VALUES (1,1),(2,1),(1,2),(2,2),(1,3),(2,3),(1,4),(1,5),(2,5);
 /*!40000 ALTER TABLE `freelancer_especialidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,10 +167,7 @@ CREATE TABLE `planos` (
 
 LOCK TABLES `planos` WRITE;
 /*!40000 ALTER TABLE `planos` DISABLE KEYS */;
-INSERT INTO `planos` VALUES 
-(1,'Site Estatico','Criação de sites estaticos',150),
-(2,'Site Intermediario','Criação de sites com tecnologia JS, JQuery',200),
-(3,'Site Avançado','Criação de sites com tecnologia JS, JQuery e PHP',300);
+INSERT INTO `planos` VALUES (1,'Site Estatico','Criação de sites estaticos',1500),(2,'Site Intermediario','Criação de sites com tecnologia JS, JQuery',2000),(3,'Site Avançado','Criação de sites com tecnologia JS, JQuery e PHP',3000);
 /*!40000 ALTER TABLE `planos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,10 +186,11 @@ CREATE TABLE `trabalho` (
   `id_cliente` int(11) NOT NULL,
   `id_freelancer` int(11) DEFAULT NULL,
   `situacao` int(11) DEFAULT '0',
+  `detalhado` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_freelancer` (`id_freelancer`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,13 +199,7 @@ CREATE TABLE `trabalho` (
 
 LOCK TABLES `trabalho` WRITE;
 /*!40000 ALTER TABLE `trabalho` DISABLE KEYS */;
-INSERT INTO `trabalho` VALUES 
-(1,'Bracomal Pneus',1,'Apresentação da Empresa',1,NULL,0),
-(2,'Site de Loja de Tecnologia',1,'Apresentação da Empresa',2,NULL,0),
-(3,'E-commerce',3,'Loja de Vendas ONline',3,NULL,0),
-(4,'Luiza Alimentos',1,'Site para apresentar a empresa',1,1,1),
-(6,'Site Fui Feito',2,'Site que já foi feito',2,1,2),
-(7,'Site Já feito Também',1,'Outro site já feito',3,1,2);
+INSERT INTO `trabalho` VALUES (1,'Bracomal Pneus',1,'Apresentação da Empresa',1,NULL,0,'Trabalho todo detalhado aqui!'),(2,'Site de Loja de Tecnologia',1,'Apresentação da Empresa',2,NULL,0,'Trabalho todo detalhado aqui!'),(3,'E-commerce',3,'Loja de Vendas ONline',3,NULL,0,'Trabalho todo detalhado aqui!'),(4,'Luiza Alimentos',1,'Site para apresentar a empresa',1,1,1,'Trabalho todo detalhado aqui!'),(6,'Site Fui Feito',2,'Site que já foi feito',2,1,2,'Trabalho todo detalhado aqui!'),(7,'Site Já feito Também',1,'Outro site já feito',3,1,2,'Trabalho todo detalhado aqui!'),(8,'Novo Trabalho Bracobum',1,'Site para apresentação da Empresa',4,NULL,0,'Descrição detalhada Aqui!'),(9,'Novo Trabalho 2',1,'Descricao pequena',4,1,3,'Descricao detalhada');
 /*!40000 ALTER TABLE `trabalho` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -241,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-19  5:44:43
+-- Dump completed on 2016-10-10  5:28:28
