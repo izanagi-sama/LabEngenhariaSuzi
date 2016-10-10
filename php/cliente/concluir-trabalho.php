@@ -1,16 +1,15 @@
 <?php
-//header('Content-type: application/json; charset=utf-8');
-//use \Firebase\JWT\JWT;
-//require_once("../vendor/autoload.php");
+header('Content-type: application/json; charset=utf-8');
+use \Firebase\JWT\JWT;
+require_once("../vendor/autoload.php");
 require_once("../config.php");
-//include("../recebe-jwt.php");
+include("../recebe-jwt.php");
+$input = @json_decode(file_get_contents("php://input"));
+$id = $token->data->id;
+$situacao = 2;
+$nova_situacao = 3;
 
-//$input = @json_decode(file_get_contents("php://input"));
-
-//$id = $token->data->id;
-
-
-/*Area de testes*/
+/*Area de testes*
     $input = array("id"=>9);
     $input = (object) $input;
     $id = 4;
@@ -22,8 +21,7 @@ if($input == null or !isset($input->id)) {
     exit;
 }
 
-$situacao = 2;
-$nova_situacao = 3;
+
 
 try{
     $pdo = new PDO($config->bd->dsn, $config->bd->user, $config->bd->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));

@@ -1,16 +1,16 @@
 <?php
 
-//header('Content-type: application/json; charset=utf-8');
-//use \Firebase\JWT\JWT;
-//require_once("../vendor/autoload.php");
+header('Content-type: application/json; charset=utf-8');
+use \Firebase\JWT\JWT;
+require_once("../vendor/autoload.php");
 require_once("../config.php");
-//include("../recebe-jwt.php");
-//$id = $token->data->id;
+include("../recebe-jwt.php");
+$id = $token->data->id;
 
 //$input = @json_decode(file_get_contents("php://input"));
 
-$id = 1;
-$input = (object) array("id" => 9);
+//$id = 1;
+//$input = (object) array("id" => 9);
 
 if($input == null or !isset($input->id) ) {
     echo json_encode(['resultado' => false, 'mensagem' => "Requisição invalida"]);
